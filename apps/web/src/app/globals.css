@@ -1,0 +1,106 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Custom Scrollbar ──────────────────────────────────────── */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: #2C333C;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover { background: #555D67; }
+
+/* ── Selection ─────────────────────────────────────────────── */
+::selection {
+  background-color: rgba(30, 111, 168, 0.35);
+  color: #ECEDEE;
+}
+
+/* ── Focus ─────────────────────────────────────────────────── */
+:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px #14171B, 0 0 0 4px #1E6FA8;
+  border-radius: 4px;
+}
+
+/* ── Base ──────────────────────────────────────────────────── */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scrollbar-gutter: stable;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-ink text-paper font-sans antialiased;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif text-paper;
+  }
+
+  a {
+    @apply transition-colors duration-fast;
+  }
+
+  /* Reduce motion */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+/* ── Components ────────────────────────────────────────────── */
+@layer components {
+
+  /* Divider */
+  .divider {
+    @apply border-none h-px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      #2C333C 20%,
+      #2C333C 80%,
+      transparent 100%
+    );
+  }
+
+  /* Brass accent rule */
+  .divider-brass {
+    @apply border-none w-20 h-0.5;
+    background: linear-gradient(
+      90deg,
+      #B08D57 0%,
+      rgba(176, 141, 87, 0.2) 60%,
+      transparent 100%
+    );
+  }
+
+  /* Skeleton shimmer */
+  .skeleton {
+    background: linear-gradient(
+      90deg,
+      #1C2025 0%,
+      #222830 40%,
+      #1C2025 80%
+    );
+    background-size: 600px 100%;
+    animation: shimmer 1.4s ease-in-out infinite;
+    border-radius: 4px;
+  }
+
+  /* Reveal on scroll */
+  .reveal {
+    @apply opacity-0 translate-y-6 transition-all duration-slow ease-decel;
+  }
+  .reveal.is-visible {
+    @apply opacity-100 translate-y-0;
+  }
+}
